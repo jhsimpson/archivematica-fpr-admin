@@ -258,13 +258,19 @@ class FPRule(VersionedModel, models.Model):
     THUMBNAIL = 'thumbnail'
     TRANSCRIPTION = 'transcription'
     VALIDATION = 'validation'
+    VALIDATION_PRESERVATION_DERIVATIVE = 'validatePreservationDerivative'
+    VALIDATION_ACCESS_DERIVATIVE = 'validateAccessDerivative'
+    VALIDATION_PRESERVATION_DERIVATIVE_POLICY = 'checkingPresDerivativePolicy'
+    VALIDATION_ACCESS_DERIVATIVE_POLICY = 'validateAccessDerivativePolicy'
     DEFAULT_ACCESS = 'default_access'
     DEFAULT_CHARACTERIZATION = 'default_characterization'
     DEFAULT_THUMBNAIL = 'default_thumbnail'
     USAGES = (ACCESS, CHARACTERIZATION, EXTRACTION, PRESERVATION, THUMBNAIL,
-        TRANSCRIPTION, VALIDATION,
-        DEFAULT_ACCESS, DEFAULT_CHARACTERIZATION, DEFAULT_THUMBNAIL)
-
+        TRANSCRIPTION, VALIDATION, VALIDATION_PRESERVATION_DERIVATIVE,
+        VALIDATION_ACCESS_DERIVATIVE,
+        VALIDATION_PRESERVATION_DERIVATIVE_POLICY,
+        VALIDATION_ACCESS_DERIVATIVE_POLICY, DEFAULT_ACCESS,
+        DEFAULT_CHARACTERIZATION, DEFAULT_THUMBNAIL)
     DISPLAY_CHOICES = (
         (ACCESS, 'Access'),
         (CHARACTERIZATION, 'Characterization'),
@@ -273,6 +279,10 @@ class FPRule(VersionedModel, models.Model):
         (THUMBNAIL, 'Thumbnail'),
         (TRANSCRIPTION, 'Transcription'),
         (VALIDATION, 'Validation'),
+        (VALIDATION_PRESERVATION_DERIVATIVE, 'Validation of Preservation Derivatives'),
+        (VALIDATION_ACCESS_DERIVATIVE, 'Validation of Access Derivatives'),
+        (VALIDATION_PRESERVATION_DERIVATIVE_POLICY, 'Validation of Preservation Derivatives against a Policy'),
+        (VALIDATION_ACCESS_DERIVATIVE_POLICY, 'Validation of Access Derivatives against a Policy'),
     )
     HIDDEN_CHOICES = (
         (DEFAULT_ACCESS, 'Default Access'),
@@ -285,6 +295,10 @@ class FPRule(VersionedModel, models.Model):
         'normalization': (DEFAULT_ACCESS, ACCESS, PRESERVATION, THUMBNAIL),
         'characterization': (CHARACTERIZATION, DEFAULT_CHARACTERIZATION),
         'extraction': (EXTRACTION,),
+        'validation': (VALIDATION, VALIDATION_PRESERVATION_DERIVATIVE,
+            VALIDATION_ACCESS_DERIVATIVE,
+            VALIDATION_PRESERVATION_DERIVATIVE_POLICY,
+            VALIDATION_ACCESS_DERIVATIVE_POLICY)
     }
     PURPOSE_CHOICES = DISPLAY_CHOICES + HIDDEN_CHOICES
     purpose = models.CharField(max_length=32, choices=PURPOSE_CHOICES)
@@ -499,5 +513,3 @@ class FileIDsBySingleID(models.Model):
     enabled = models.IntegerField(null=True, db_column='enabled', default=1)
     class Meta:
         db_table = u'FileIDsBySingleID'
-
-
