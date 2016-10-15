@@ -261,7 +261,7 @@ class FPRule(VersionedModel, models.Model):
     VALIDATION_PRESERVATION_DERIVATIVE = 'validatePreservationDerivative'
     VALIDATION_ACCESS_DERIVATIVE = 'validateAccessDerivative'
     VALIDATION_PRESERVATION_DERIVATIVE_POLICY = 'checkingPresDerivativePolicy'
-    VALIDATION_ACCESS_DERIVATIVE_POLICY = 'validateAccessDerivativePolicy'
+    VALIDATION_ACCESS_DERIVATIVE_POLICY = 'checkingAccessDerivativePolicy'
     DEFAULT_ACCESS = 'default_access'
     DEFAULT_CHARACTERIZATION = 'default_characterization'
     DEFAULT_THUMBNAIL = 'default_thumbnail'
